@@ -68,24 +68,24 @@ In supported AI editors (such as Cursor, Claude Code, Qoder, Windsurf, Junie, Li
 
 **Default Core Configuration**:
 
-| Command                         | Purpose                                                                              |
-| :------------------------------ | :----------------------------------------------------------------------------------- |
-| `/opsx:propose <description>`   | Create a change and generate all planning documents in one step (proposal/design/specs/tasks) |
-| `/opsx:explore`                 | Enter exploration mode — think through problems and investigate the codebase without writing code |
-| `/opsx:apply`                   | Implement tasks according to tasks.md, dynamically reading the current change context |
-| `/opsx:archive`                 | Complete and archive the current change, prompt whether to sync Delta Spec to the main spec |
+| Command                       | Purpose                                                                                           |
+| :---------------------------- | :------------------------------------------------------------------------------------------------ |
+| `/opsx:propose <description>` | Create a change and generate all planning documents in one step (proposal/design/specs/tasks)     |
+| `/opsx:explore`               | Enter exploration mode — think through problems and investigate the codebase without writing code |
+| `/opsx:apply`                 | Implement tasks according to tasks.md, dynamically reading the current change context             |
+| `/opsx:archive`               | Complete and archive the current change, prompt whether to sync Delta Spec to the main spec       |
 
 **Extended Workflow Commands** (enabled via `openspec config profile`)
 
-| Command              | Purpose                                                    |
-| :------------------- | :--------------------------------------------------------- |
+| Command              | Purpose                                                               |
+| :------------------- | :-------------------------------------------------------------------- |
 | `/opsx:new`          | Initialize the change directory structure only (no documents created) |
-| `/opsx:continue`     | Create the next document in dependency order (step-by-step mode) |
-| `/opsx:ff`           | Fast-forward to generate all planning documents at once    |
-| `/opsx:verify`       | Verify that the implementation is consistent with the spec |
-| `/opsx:sync`         | Merge Delta Spec into the main spec (without archiving)    |
-| `/opsx:bulk-archive` | Bulk-archive multiple completed changes                    |
-| `/opsx:onboard`      | 15-minute full-process guided walkthrough                  |
+| `/opsx:continue`     | Create the next document in dependency order (step-by-step mode)      |
+| `/opsx:ff`           | Fast-forward to generate all planning documents at once               |
+| `/opsx:verify`       | Verify that the implementation is consistent with the spec            |
+| `/opsx:sync`         | Merge Delta Spec into the main spec (without archiving)               |
+| `/opsx:bulk-archive` | Bulk-archive multiple completed changes                               |
+| `/opsx:onboard`      | 15-minute full-process guided walkthrough                             |
 
 The key difference between the OPSX workflow and the old version is: **actions, not phases**. You can edit any document at any time — there is no phase locking.
 
@@ -287,12 +287,12 @@ To focus on the OpenSpec process, the following engineering trade-offs were made
 
 This project uses a classic four-layer architecture to ensure separation of concerns:
 
-| Layer              | Directory (`src/`)  | Responsibilities                                                                   | Dependency Direction  |
-| :----------------- | :------------------ | :--------------------------------------------------------------------------------- | :-------------------- |
-| **Interface Layer**    | `http/`             | Handle HTTP requests, parameter parsing, authentication, response formatting       | -> Application        |
-| **Application Layer**  | `services/`         | Use case orchestration, e.g., "place order" involves deducting stock, clearing cart | -> Domain, Repo       |
-| **Domain Layer**       | `domain/`           | Pure business entities (`types.js`) and logic, no external dependencies            | None                  |
-| **Infrastructure** | `repo/`, `persist/` | Data persistence implementation (Memory/File)                                      | Implementation Detail |
+| Layer                 | Directory (`src/`)  | Responsibilities                                                                    | Dependency Direction  |
+| :-------------------- | :------------------ | :---------------------------------------------------------------------------------- | :-------------------- |
+| **Interface Layer**   | `http/`             | Handle HTTP requests, parameter parsing, authentication, response formatting        | -> Application        |
+| **Application Layer** | `services/`         | Use case orchestration, e.g., "place order" involves deducting stock, clearing cart | -> Domain, Repo       |
+| **Domain Layer**      | `domain/`           | Pure business entities (`types.js`) and logic, no external dependencies             | None                  |
+| **Infrastructure**    | `repo/`, `persist/` | Data persistence implementation (Memory/File)                                       | Implementation Detail |
 
 ### 5.2 Boundaries and Dependency Rules
 
@@ -514,12 +514,12 @@ This is the core of OpenSpec — **code is a mapping of the spec**. When writing
 
 Establish a Spec ↔ Code ↔ Test mapping to ensure every Spec item has code coverage:
 
-| Spec Definition (Requirements)       | Code Implementation                                           | Verification Method     |
-| :----------------------------------- | :------------------------------------------------------------ | :---------------------- |
-| `POST /api/orders`                   | `src/http/server.js` (Route Handler)                          | Integration Test        |
-| `Response 409: Stock insufficient`   | `catch (e) { if (e.message === 'OUT_OF_STOCK') ... }`         | Unit Test (Error Case)  |
-| `Order.totalCents` (Model)           | `src/domain/types.js` (Interface)                             | JSDoc / Code Review     |
-| `p99 < 100ms` (SLO)                  | `performance.spec.js` (Performance Test)                      | CI Pipeline             |
+| Spec Definition (Requirements)     | Code Implementation                                   | Verification Method    |
+| :--------------------------------- | :---------------------------------------------------- | :--------------------- |
+| `POST /api/orders`                 | `src/http/server.js` (Route Handler)                  | Integration Test       |
+| `Response 409: Stock insufficient` | `catch (e) { if (e.message === 'OUT_OF_STOCK') ... }` | Unit Test (Error Case) |
+| `Order.totalCents` (Model)         | `src/domain/types.js` (Interface)                     | JSDoc / Code Review    |
+| `p99 < 100ms` (SLO)                | `performance.spec.js` (Performance Test)              | CI Pipeline            |
 
 **Practical Tip**: Reference the corresponding Spec section in code comments, e.g., `// Corresponds to Spec: POST /api/orders`.
 
