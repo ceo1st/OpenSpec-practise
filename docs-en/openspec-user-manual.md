@@ -109,11 +109,11 @@ The advantages of this approach are:
 
 ### 1.2 Core Philosophy
 
-| Philosophy                          | Meaning                                                                               |
-| ----------------------------------- | ------------------------------------------------------------------------------------- |
-| **Fluid, not rigid**                | Documents can be updated at any time; no strict phase gates                           |
-| **Iterative, not waterfall**        | Supports incrementally adding requirements and progressively refining them            |
-| **Simple, not complex**             | Only Markdown files required; no complex toolchain                                    |
+| Philosophy                          | Meaning                                                                                 |
+| ----------------------------------- | --------------------------------------------------------------------------------------- |
+| **Fluid, not rigid**                | Documents can be updated at any time; no strict phase gates                             |
+| **Iterative, not waterfall**        | Supports incrementally adding requirements and progressively refining them              |
+| **Simple, not complex**             | Only Markdown files required; no complex toolchain                                      |
 | **Works for both new and existing** | Suitable for existing codebases (Brownfield) as well as brand-new projects (Greenfield) |
 
 > **Terminology**:
@@ -303,11 +303,11 @@ your-project/
 
 ### 3.5 File Descriptions
 
-| File/Directory | Purpose                                                                   | Required       |
-| -------------- | ------------------------------------------------------------------------- | -------------- |
-| `config.yaml`  | Project background, tech stack, constraints, per-document rule injections | Recommended    |
-| `changes/`     | Stores active change proposals                                            | Required       |
-| `specs/`       | Stores archived specs                                                     | Optional       |
+| File/Directory | Purpose                                                                   | Required    |
+| -------------- | ------------------------------------------------------------------------- | ----------- |
+| `config.yaml`  | Project background, tech stack, constraints, per-document rule injections | Recommended |
+| `changes/`     | Stores active change proposals                                            | Required    |
+| `specs/`       | Stores archived specs                                                     | Optional    |
 
 > **Difference from older versions**: Since v1.0.0, `openspec/AGENTS.md` and `openspec/project.md` have been removed. Project context is now written uniformly into the `context:` field of `openspec/config.yaml`, which is injected into every AI planning request — more reliable than the old approach.
 
@@ -419,12 +419,12 @@ openspec/changes/<change-name>/
 
 ### 4.4 File Roles
 
-| File                         | Role                                  | Required     | Format Requirements                                                                                                                                            |
-| ---------------------------- | ------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `proposal.md`                | Explains "why" and "what"             | **Required** | Must contain `## Why` and `## What Changes` (enforced by validator); recommended to include `## Capabilities` (needed by AI workflow)                          |
-| `specs/<capability>/spec.md` | Detailed requirements and acceptance scenarios | **Required** | Must use Delta Header + Requirement + Scenario format                                                                                                          |
-| `design.md`                  | Technical implementation plan         | Recommended  | No strict format requirements                                                                                                                                  |
-| `tasks.md`                   | Implementation task list              | Recommended  | No strict format requirements                                                                                                                                  |
+| File                         | Role                                           | Required     | Format Requirements                                                                                                                   |
+| ---------------------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `proposal.md`                | Explains "why" and "what"                      | **Required** | Must contain `## Why` and `## What Changes` (enforced by validator); recommended to include `## Capabilities` (needed by AI workflow) |
+| `specs/<capability>/spec.md` | Detailed requirements and acceptance scenarios | **Required** | Must use Delta Header + Requirement + Scenario format                                                                                 |
+| `design.md`                  | Technical implementation plan                  | Recommended  | No strict format requirements                                                                                                         |
+| `tasks.md`                   | Implementation task list                       | Recommended  | No strict format requirements                                                                                                         |
 
 ### 4.5 Change Lifecycle
 
@@ -516,17 +516,17 @@ specs/
 
 #### 5.3.1 Format Quick Reference
 
-| Element       | Format                                   | Example                                  |
-| ------------- | ---------------------------------------- | ---------------------------------------- |
-| Delta Header  | `## ADDED/MODIFIED/REMOVED Requirements` | `## ADDED Requirements`                  |
-| Requirement heading | `### Requirement: <title>`        | `### Requirement: GPU Auto-Discovery`    |
-| Scenario heading    | `#### Scenario: <title>`          | `#### Scenario: NVIDIA GPU Discovery`   |
-| Scenario content    | Gherkin format                    | `Given/When/Then`                        |
+| Element             | Format                                   | Example                               |
+| ------------------- | ---------------------------------------- | ------------------------------------- |
+| Delta Header        | `## ADDED/MODIFIED/REMOVED Requirements` | `## ADDED Requirements`               |
+| Requirement heading | `### Requirement: <title>`               | `### Requirement: GPU Auto-Discovery` |
+| Scenario heading    | `#### Scenario: <title>`                 | `#### Scenario: NVIDIA GPU Discovery` |
+| Scenario content    | Gherkin format                           | `Given/When/Then`                     |
 
 **Delta Header selection guide**:
 
-| Delta Header               | When to use                                          |
-| -------------------------- | ---------------------------------------------------- |
+| Delta Header               | When to use                                           |
+| -------------------------- | ----------------------------------------------------- |
 | `## ADDED Requirements`    | New capabilities or requirements added in this change |
 | `## MODIFIED Requirements` | Modifications to an existing Requirement in the spec  |
 | `## REMOVED Requirements`  | Requirements explicitly deprecated or deleted         |
@@ -618,16 +618,16 @@ The technical design document has no strict format requirements, but it is recom
 
 **Recommended section structure**:
 
-| Section Name          | Recommended Content                                                                             |
-| --------------------- | ----------------------------------------------------------------------------------------------- |
-| Architecture Overview | Overall system architecture diagram (Mermaid or ASCII recommended) and layer relationship description |
-| Core Components       | List of core modules, each module's responsibilities, boundaries, and internal implementation notes |
-| Data Model            | Field definitions, types, constraints, and inter-entity relationships for key entities          |
-| API Design            | Interface routes, request/response formats, and error code specifications                       |
+| Section Name          | Recommended Content                                                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------- |
+| Architecture Overview | Overall system architecture diagram (Mermaid or ASCII recommended) and layer relationship description   |
+| Core Components       | List of core modules, each module's responsibilities, boundaries, and internal implementation notes     |
+| Data Model            | Field definitions, types, constraints, and inter-entity relationships for key entities                  |
+| API Design            | Interface routes, request/response formats, and error code specifications                               |
 | Integration Patterns  | Integration approaches with external systems/modules, including events, queues, synchronous calls, etc. |
-| Technology Stack      | Selected technologies and libraries, rationale, and comparison with alternatives                |
-| Security              | Authentication, authorization, data encryption, input validation, and other security design points |
-| Deployment            | Environment requirements, deployment steps, and rollback plan                                   |
+| Technology Stack      | Selected technologies and libraries, rationale, and comparison with alternatives                        |
+| Security              | Authentication, authorization, data encryption, input validation, and other security design points      |
+| Deployment            | Environment requirements, deployment steps, and rollback plan                                           |
 
 ### 5.5 tasks.md - Task List
 
@@ -704,12 +704,12 @@ The task list is used to break down the design into executable implementation st
 
 ### 5.7 Template File Summary
 
-| Template          | Corresponding built-in file (view full path with `openspec templates`) | Purpose                  |
-| ----------------- | ---------------------------------------------------------------------- | ------------------------ |
-| proposal.md template | `schemas/spec-driven/templates/proposal.md`                         | Proposal document template |
-| spec.md template  | `schemas/spec-driven/templates/spec.md`                                | Capability spec template  |
-| design.md template | `schemas/spec-driven/templates/design.md`                             | Technical design template |
-| tasks.md template | `schemas/spec-driven/templates/tasks.md`                               | Task list template        |
+| Template             | Corresponding built-in file (view full path with `openspec templates`) | Purpose                    |
+| -------------------- | ---------------------------------------------------------------------- | -------------------------- |
+| proposal.md template | `schemas/spec-driven/templates/proposal.md`                            | Proposal document template |
+| spec.md template     | `schemas/spec-driven/templates/spec.md`                                | Capability spec template   |
+| design.md template   | `schemas/spec-driven/templates/design.md`                              | Technical design template  |
+| tasks.md template    | `schemas/spec-driven/templates/tasks.md`                               | Task list template         |
 
 ---
 
@@ -894,27 +894,27 @@ Before running `openspec validate`, confirm:
 
 ### 7.1 Init and Create
 
-| Command                      | Description                          | Example                             |
-| ---------------------------- | ------------------------------------ | ----------------------------------- |
-| `openspec init`              | Initialize an OpenSpec project       | `openspec init --tools qoder`       |
-| `openspec new change <name>` | Create only the change directory     | `openspec new change add-user-auth` |
-| `openspec update`            | Update AI skill and command files    | `openspec update`                   |
+| Command                      | Description                       | Example                             |
+| ---------------------------- | --------------------------------- | ----------------------------------- |
+| `openspec init`              | Initialize an OpenSpec project    | `openspec init --tools qoder`       |
+| `openspec new change <name>` | Create only the change directory  | `openspec new change add-user-auth` |
+| `openspec update`            | Update AI skill and command files | `openspec update`                   |
 
 ### 7.2 View and Validate
 
-| Command                           | Description                    | Example                                        |
-| --------------------------------- | ------------------------------ | ---------------------------------------------- |
-| `openspec view`                   | Open the terminal UI           | `openspec view`                                |
-| `openspec status --change <name>` | View change status             | `openspec status --change user-auth`           |
-| `openspec validate <name>`        | Validate change document format | `openspec validate user-auth`                 |
-| `openspec list --changes`         | List all changes               | `openspec list --changes`                      |
-| `openspec list --specs`           | List all specs                 | `openspec list --specs`                        |
-| `openspec show <name>`            | Show change details            | `openspec show user-auth --json --deltas-only` |
+| Command                           | Description                     | Example                                        |
+| --------------------------------- | ------------------------------- | ---------------------------------------------- |
+| `openspec view`                   | Open the terminal UI            | `openspec view`                                |
+| `openspec status --change <name>` | View change status              | `openspec status --change user-auth`           |
+| `openspec validate <name>`        | Validate change document format | `openspec validate user-auth`                  |
+| `openspec list --changes`         | List all changes                | `openspec list --changes`                      |
+| `openspec list --specs`           | List all specs                  | `openspec list --specs`                        |
+| `openspec show <name>`            | Show change details             | `openspec show user-auth --json --deltas-only` |
 
 ### 7.3 Archive and Manage
 
-| Command                   | Description                                                                                                                          | Example                      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| Command                   | Description                                                                                                                        | Example                      |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `openspec archive <name>` | Archive a completed change (merges Deltas into the `specs/` main directory and cleans up the temporary directory under `changes/`) | `openspec archive user-auth` |
 
 ### 7.4 Config and Debug
@@ -1047,12 +1047,12 @@ The system needs a secure and reliable user authentication mechanism supporting:
 
 #### 8.3.1 Gherkin Format Key Points
 
-| Keyword | Purpose                                | Example                                       |
-| ------- | -------------------------------------- | --------------------------------------------- |
-| `Given` | Precondition; describes initial state  | `Given the user is logged into the system`    |
-| `When`  | Triggering action                      | `When the user clicks the "Submit Order" button` |
-| `Then`  | Expected result                        | `Then the order status changes to "Pending Payment"` |
-| `And`   | Connects multiple conditions or results | `And the user receives an order confirmation email` |
+| Keyword | Purpose                                 | Example                                              |
+| ------- | --------------------------------------- | ---------------------------------------------------- |
+| `Given` | Precondition; describes initial state   | `Given the user is logged into the system`           |
+| `When`  | Triggering action                       | `When the user clicks the "Submit Order" button`     |
+| `Then`  | Expected result                         | `Then the order status changes to "Pending Payment"` |
+| `And`   | Connects multiple conditions or results | `And the user receives an order confirmation email`  |
 
 #### 8.3.2 Good Scenario Example
 
@@ -1101,23 +1101,23 @@ OpenSpec 1.0+ introduced the new OPSX workflow, replacing the old phase-locked m
 
 **Default Core configuration (4 commonly used commands)**:
 
-| Command                       | Purpose                                                                                                                                       |
-| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| Command                       | Purpose                                                                                                                                                                |
+| :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/opsx:propose <description>` | Creates a change in one step and **intelligently generates** all planning documents (AI infers the kebab-case directory name and fills in proposal/design/specs/tasks) |
-| `/opsx:explore`               | Enter exploration mode: think through problems and investigate the codebase without writing code                                              |
-| `/opsx:apply`                 | Implement tasks following tasks.md                                                                                                            |
-| `/opsx:archive`               | Complete and archive the current change                                                                                                       |
+| `/opsx:explore`               | Enter exploration mode: think through problems and investigate the codebase without writing code                                                                       |
+| `/opsx:apply`                 | Implement tasks following tasks.md                                                                                                                                     |
+| `/opsx:archive`               | Complete and archive the current change                                                                                                                                |
 
 **Extended workflow commands (enabled via `openspec config profile`)**:
 
-| Command              | Purpose                                                              |
-| :------------------- | :------------------------------------------------------------------- |
-| `/opsx:new`          | Initialize change directory structure only, without creating documents |
-| `/opsx:continue`     | Create the next document in dependency order (step-by-step mode)    |
-| `/opsx:ff`           | Fast-forward to generate all planning documents in one step          |
-| `/opsx:verify`       | Verify that the implementation is consistent with the spec           |
-| `/opsx:sync`         | Merge Delta Specs into the main spec without archiving               |
-| `/opsx:bulk-archive` | Batch-archive multiple completed changes                             |
+| Command              | Purpose                                                                    |
+| :------------------- | :------------------------------------------------------------------------- |
+| `/opsx:new`          | Initialize change directory structure only, without creating documents     |
+| `/opsx:continue`     | Create the next document in dependency order (step-by-step mode)           |
+| `/opsx:ff`           | Fast-forward to generate all planning documents in one step                |
+| `/opsx:verify`       | Verify that the implementation is consistent with the spec                 |
+| `/opsx:sync`         | Merge Delta Specs into the main spec without archiving                     |
+| `/opsx:bulk-archive` | Batch-archive multiple completed changes                                   |
 | `/opsx:onboard`      | Guided 15-minute full-workflow walkthrough, ideal for onboarding new users |
 
 > **Migration note**: Legacy commands (`/openspec:proposal`, `/openspec:apply`, `/openspec:archive`) were removed in v1.0.0. Mapping:
@@ -1159,23 +1159,23 @@ When reviewing a PR, check the OpenSpec documents:
 
 OpenSpec supports 20+ AI coding assistants. The most common ones are:
 
-| Tool                   | Type         | Support Level                                                         |
-| ---------------------- | ------------ | --------------------------------------------------------------------- |
-| **Claude Code**        | CLI + IDE    | Full support                                                          |
-| **Qoder**              | IDE          | Full support                                                          |
-| **Cursor**             | IDE          | Full support                                                          |
-| **JetBrains Junie**    | IDE plugin   | Full support                                                          |
-| **Lingma IDE**         | IDE plugin   | Full support                                                          |
-| **ForgeCode**          | IDE plugin   | Full support                                                          |
-| **IBM Bob**            | IDE plugin   | Full support                                                          |
-| **GitHub Copilot**     | IDE plugin   | Full support                                                          |
-| **Cline**              | VS Code plugin | Full support                                                        |
-| **Windsurf**           | IDE          | Full support                                                          |
-| **Amazon Q Developer** | IDE plugin   | Full support                                                          |
-| **Gemini CLI**         | CLI          | Full support                                                          |
-| **Continue**           | IDE plugin   | Full support                                                          |
-| **Aider**              | CLI          | Supported (command-line tool; `openspec init` auto-generation not supported) |
-| **Roo Code**           | VS Code plugin | Full support                                                        |
+| Tool                   | Type           | Support Level                                                                |
+| ---------------------- | -------------- | ---------------------------------------------------------------------------- |
+| **Claude Code**        | CLI + IDE      | Full support                                                                 |
+| **Qoder**              | IDE            | Full support                                                                 |
+| **Cursor**             | IDE            | Full support                                                                 |
+| **JetBrains Junie**    | IDE plugin     | Full support                                                                 |
+| **Lingma IDE**         | IDE plugin     | Full support                                                                 |
+| **ForgeCode**          | IDE plugin     | Full support                                                                 |
+| **IBM Bob**            | IDE plugin     | Full support                                                                 |
+| **GitHub Copilot**     | IDE plugin     | Full support                                                                 |
+| **Cline**              | VS Code plugin | Full support                                                                 |
+| **Windsurf**           | IDE            | Full support                                                                 |
+| **Amazon Q Developer** | IDE plugin     | Full support                                                                 |
+| **Gemini CLI**         | CLI            | Full support                                                                 |
+| **Continue**           | IDE plugin     | Full support                                                                 |
+| **Aider**              | CLI            | Supported (command-line tool; `openspec init` auto-generation not supported) |
+| **Roo Code**           | VS Code plugin | Full support                                                                 |
 
 ### 9.2 Telemetry Settings
 
@@ -1197,13 +1197,13 @@ echo 'export OPENSPEC_TELEMETRY=0' >> ~/.bashrc # Bash
 
 #### 9.3.1 Q1: What is the difference between OpenSpec and Swagger/OpenAPI?
 
-| Feature          | OpenSpec                         | OpenAPI/Swagger              |
-| ---------------- | -------------------------------- | ---------------------------- |
-| Primary purpose  | Spec-driven requirements development | API interface documentation |
-| Document type    | Markdown                         | YAML/JSON                    |
-| Validation       | CLI validation + AI understanding | Syntax validation            |
+| Feature          | OpenSpec                                    | OpenAPI/Swagger                        |
+| ---------------- | ------------------------------------------- | -------------------------------------- |
+| Primary purpose  | Spec-driven requirements development        | API interface documentation            |
+| Document type    | Markdown                                    | YAML/JSON                              |
+| Validation       | CLI validation + AI understanding           | Syntax validation                      |
 | Applicable phase | Early development (requirements definition) | Mid-development (interface definition) |
-| Target users     | Product managers + developers + AI | Developers + frontend        |
+| Target users     | Product managers + developers + AI          | Developers + frontend                  |
 
 The two can be used together: use OpenSpec to define requirements and scenarios first, then use OpenAPI to define interface details.
 
@@ -1229,12 +1229,12 @@ Yes. Each change is an independent folder and can be developed in parallel. Howe
 
 ### 9.4 Reference Links
 
-| Resource                       | Link                                                                  |
-| ------------------------------ | --------------------------------------------------------------------- |
-| Official repository            | <https://github.com/Fission-AI/OpenSpec>                              |
-| Getting started                | <https://openspec.pro/getting-started/>                               |
-| Official documentation         | <https://github.com/Fission-AI/OpenSpec/tree/main/docs>               |
-| npm package                    | <https://www.npmjs.com/package/@fission-ai/openspec>                  |
+| Resource                       | Link                                                                 |
+| ------------------------------ | -------------------------------------------------------------------- |
+| Official repository            | <https://github.com/Fission-AI/OpenSpec>                             |
+| Getting started                | <https://openspec.pro/getting-started/>                              |
+| Official documentation         | <https://github.com/Fission-AI/OpenSpec/tree/main/docs>              |
+| npm package                    | <https://www.npmjs.com/package/@fission-ai/openspec>                 |
 | Companion slides (old version) | [openspec-user-manual-v1.pptx](../docs/openspec-user-manual-v1.pptx) |
 | Companion slides (current)     | [openspec-user-manual-v2.pptx](../docs/openspec-user-manual-v2.pptx) |
 
