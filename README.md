@@ -1,5 +1,7 @@
 # OpenSpec Practise
 
+🌐 [English Version](./README-en.md) | 🇨🇳 中文版
+
 本项目起源于"AI 原力注入"社区关于 AI 编程的深度探讨。针对社区提出的"利用 OpenSpec 实现 Spec 驱动开发"这一构想，本项目通过一个完整的实战案例，演示了 OpenSpec 规范在 AI 辅助编程中的具体应用。
 
 作为 OpenSpec 的学习与实践仓库，本项目提供了系统的文档分析、详细的使用手册及多语言示例，旨在帮助开发者深入理解并高效应用该规范。

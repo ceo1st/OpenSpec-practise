@@ -1,5 +1,7 @@
 # OpenSpec Practise
 
+🌐 English Version | 🇨🇳 [中文版](./README.md)
+
 This project originated from in-depth discussions on AI programming within the "AI Force Injection" community. In response to the community's vision of "leveraging OpenSpec for Spec-Driven Development," this project demonstrates the practical application of the OpenSpec specification in AI-assisted programming through a complete hands-on example.
 
 As a learning and practice repository for OpenSpec, this project provides systematic documentation analysis, detailed user manuals, and multi-language examples, aimed at helping developers deeply understand and efficiently apply the specification.
