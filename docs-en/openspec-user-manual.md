@@ -86,6 +86,9 @@ Based on practical project experience.
       - [9.3.2 Q2: How do I introduce OpenSpec into an existing project?](#932-q2-how-do-i-introduce-openspec-into-an-existing-project)
       - [9.3.3 Q3: What if the AI doesn't follow the spec after I write it?](#933-q3-what-if-the-ai-doesnt-follow-the-spec-after-i-write-it)
       - [9.3.4 Q4: Can multiple changes proceed simultaneously?](#934-q4-can-multiple-changes-proceed-simultaneously)
+      - [9.3.5 Q5: How to describe internal logic changes (e.g., database state changes) using externally observable behavior?](#935-q5-how-to-describe-internal-logic-changes-eg-database-state-changes-using-externally-observable-behavior)
+      - [9.3.6 Q6: Are BDD format Specs (Given/When/Then) written by AI or humans?](#936-q6-are-bdd-format-specs-givenwhenthen-written-by-ai-or-humans)
+      - [9.3.7 Q7: How to maintain the readability of baseline Specs when business logic becomes complex (e.g., hundreds of lines in a single method)?](#937-q7-how-to-maintain-the-readability-of-baseline-specs-when-business-logic-becomes-complex-eg-hundreds-of-lines-in-a-single-method)
     - [9.4 Reference Links](#94-reference-links)
 
 ---
@@ -185,10 +188,10 @@ openspec --version
 openspec --help
 ```
 
-After successful installation, you will see output similar to:
+After successful installation, you will see output similar to (or manually run `openspec --version` to check the version number):
 
 ```bash
-1.3.0
+1.3.1
 ```
 
 ### 2.4 Configure Shell Auto-Completion (Optional)
@@ -1221,10 +1224,35 @@ The two can be used together: use OpenSpec to define requirements and scenarios 
 
 #### 9.3.4 Q4: Can multiple changes proceed simultaneously?
 
-Yes. Each change is an independent folder and can be developed in parallel. However, it is recommended to:
+OpenSpec's change directory design naturally supports parallel workflows, but dependencies need to be managed reasonably.
 
-- Avoid dependencies between changes
-- Complete one change before creating the next
+Yes, multiple changes can proceed simultaneously. Each change is an independent folder and they do not interfere with each other. However, to reduce the risk of merge conflicts, it is recommended to:
+
+- Avoid business or code dependencies between parallel changes during planning.
+- Adopt a small-steps strategy, complete one change and archive it (`Archive`) before creating the next one.
+
+#### 9.3.5 Q5: How to describe internal logic changes (e.g., database state changes) using externally observable behavior?
+
+OpenSpec emphasizes "externally observable behavior", but this is not limited to front-end UI changes; it also includes inter-system interactions and changes in persisted state. For purely internal logic (e.g., a condition change that only reflects in the database), you can handle it in the following ways to maintain Spec consistency.
+
+- **Expose Testing Boundaries**: Treat the final state of the database or cache as a verifiable "observable result". In the Spec, these changes in persisted state can be used as assertion conditions in scenarios (e.g., after an order is created, inventory data is accurately reduced by the corresponding amount).
+- **Distinguish Business Contracts from Implementation Details**: If changes in internal logic affect the data structures or business rules of downstream systems, it is a contract change and must be explicitly stated in the Spec. If it is merely code refactoring (like swapping an algorithm without changing the result), it does not need to be reflected in the Spec at all; such content should be placed in `design.md` or `tasks.md`.
+
+#### 9.3.6 Q6: Are BDD format Specs (Given/When/Then) written by AI or humans?
+
+To ensure the accuracy of business logic and the stability of specifications, teams should adopt a collaborative model of **human-led design and AI-assisted generation**.
+
+- **Human-led Core Logic**: Core business scenarios (such as main flows and key exception paths) must be designed by architects or developers to ensure business intent does not deviate.
+- **AI-assisted Completion and Formatting**: AI is highly suitable for converting unstructured natural language requirements into standard BDD (Given/When/Then) format, or automatically deducing and supplementing edge scenarios based on core scenarios.
+- **Human Review Closed Loop**: All Specs generated or modified by AI must undergo human review. Relying entirely on AI to generate from scratch often leads to unstable scenarios, missing details, or deviations from real business needs.
+
+#### 9.3.7 Q7: How to maintain the readability of baseline Specs when business logic becomes complex (e.g., hundreds of lines in a single method)?
+
+Complex business logic often makes Specs difficult to read. In such cases, architectural splitting and expression optimization are required to maintain document clarity and maintainability.
+
+- **Domain and Module Splitting**: When a single business scenario becomes too large, follow Domain-Driven Design (DDD) principles to break down complex processes into independent sub-domains or modules, and create independent sub-Spec files for each module to prevent single files from expanding infinitely.
+- **Elevate Abstraction Level**: The core of a Spec is to describe "business rules and input/output contracts", not the execution control flow of the code. Strictly avoid piling up code-like conditional branches in the Spec. For complex rule combinations, using Markdown Decision Tables is recommended for high-density, structured expression.
+- **Reverse Drive Code Refactoring**: If a single method is hundreds of lines long making it hard for the Spec to correspond, this is usually a signal that the code structure needs optimization. At this point, the pain point of maintaining the Spec should be turned into motivation for code refactoring. By extracting the Strategy pattern or Domain Services, the code can be realigned with a clear domain model.
 
 ### 9.4 Reference Links
 
@@ -1239,6 +1267,6 @@ Yes. Each change is an independent folder and can be developed in parallel. Howe
 
 ---
 
-_Document version: 2.1_
-_Last updated: 2026-04-13_
-_Based on OpenSpec v1.3.0 (new IDE support, Shell completions optimization, etc.)_
+_Document version: 2.2_
+_Last updated: 2026-05-07_
+_Based on Issue #7 added FAQ and optimized document structure. Includes OpenSpec v1.3.1 updates._
