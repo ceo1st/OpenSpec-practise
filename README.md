@@ -96,6 +96,50 @@
 
 ---
 
+## DDD 到 OpenSpec 映射
+
+领域驱动设计（DDD）的战略洞察与 OpenSpec 的结构化规范相融合，构建了从领域模型到工程代码的高可靠衔接体系。下述 DDD 产出物向 OpenSpec 工作流转化的标准映射路径，均提炼自开源技能库项目 [domain-driven-design-skills](https://github.com/ForceInjection/domain-driven-design-skills)（详见 `ddd-openspec-mapping.md` 文档）。
+
+### 1. 战略对齐与目录映射
+
+在战略层面，通过将 DDD 的空间划分方法论引入 OpenSpec 的目录结构，可以实现设计与规格的天然对应。
+
+DDD 的“限界上下文”对应 OpenSpec 中 `specs/` 目录下的子领域目录。这种对齐方式确保了每一个 DDD 识别出的业务边界在工程规格中都有明确的归属。同时，通过在 `openspec/config.yaml` 中声明这种映射关系，可以为 AI Agent 提供全局的架构上下文。
+
+```yaml
+# openspec/config.yaml 示例：领域与限界上下文的映射配置
+context: |
+  ## 项目领域映射
+  本系统遵循 DDD 设计，核心限界上下文包括：
+  - 用户管理上下文
+  - 订单管理上下文
+  - 支付上下文
+```
+
+### 2. 战术落地与结构映射
+
+战术设计决定了代码实现的质量。OpenSpec 提供了一套结构化的表达方式，将 DDD 的构造块转化为可验证、可执行的任务序列。
+
+下表展示了 OpenSpec 核心组件与 DDD 产出物的具体映射关系：
+
+| OpenSpec 规范结构 | 对应的 DDD 产出物 | 描述与说明 |
+| :--- | :--- | :--- |
+| **领域（Domain）** | **限界上下文（Bounded Context）** | 一个领域目录对应一个限界上下文。 |
+| **需求（Requirement）** | **领域服务（Domain Service）** / **命令（Command）** | 描述一个核心业务功能或操作。 |
+| **场景（Scenario）** | **聚合（Aggregate）行为** | 使用 Given/When/Then 格式精确描述聚合行为。 |
+| **技术设计（Design）** | **应用服务（Application Service）** | 协调多个领域服务，管理事务与安全。 |
+| **实施任务（Tasks）** | **战术设计待办列表** | 将实体、值对象、仓储接口等具体实现任务化。 |
+
+### 3. 工作流驱动的生命周期
+
+OpenSpec 的工作流与 DDD 的迭代建模高度契合，特别强调存量优先的重构能力。
+
+- **提案（Propose）**：使用 `/opsx:propose` 快速初始化变更，沉淀领域建模结论。
+- **实施（Apply）**：利用 AI 依据规范（需求与场景）进行代码实现与自动化验证。
+- **归档（Archive）**：通过 `openspec archive` 将增量规范合并至主规范，确保领域知识的单一事实来源。
+
+---
+
 ## 快速开始
 
 ### Node.js 示例
@@ -149,7 +193,7 @@ python -m uvicorn src.api.server:app --reload
 
 为了在实际开发中更高效地落地 OpenSpec 规范，本项目推荐搭配专用的 AI 助手技能进行协作。
 
-- **[OpenSpec Assistant](https://github.com/ForceInjection/awesome-skills/tree/main/openspec-assistant)**: 这是一个专为执行 OpenSpec 规范驱动开发 (SDD) 而设计的 AI 技能。它涵盖了意图对齐、规范生成、代码实现与自动化验证的完整生命周期。同时支持架构师 (编写与评审 Spec) 、开发者 (编写代码) 和 QA (编写测试) 等多角色协同工作，并原生支持本项目的 `/opsx` 指令体系。
+- **[OpenSpec Assistant](https://github.com/ForceInjection/awesome-skills/tree/main/skills/openspec-assistant)**: 这是一个专为执行 OpenSpec 规范驱动开发 (SDD) 而设计的 AI 技能。它涵盖了意图对齐、规范生成、代码实现与自动化验证的完整生命周期。同时支持架构师 (编写与评审 Spec) 、开发者 (编写代码) 和 QA (编写测试) 等多角色协同工作，并原生支持本项目的 `/opsx` 指令体系。
 
 ---
 
@@ -158,3 +202,4 @@ python -m uvicorn src.api.server:app --reload
 - [OpenSpec 官方仓库](https://github.com/Fission-AI/OpenSpec)
 - [OpenSpec 官方文档](https://github.com/Fission-AI/OpenSpec/tree/main/docs)
 - [npm 包](https://www.npmjs.com/package/@fission-ai/openspec)
+- [DDD 技能库在线项目](https://github.com/ForceInjection/domain-driven-design-skills)
