@@ -96,6 +96,50 @@ This project demonstrates the following core OpenSpec features:
 
 ---
 
+## DDD to OpenSpec Mapping
+
+The strategic insights of Domain-Driven Design (DDD) combined with the structured specifications of OpenSpec build a highly reliable connection system from domain models to engineering code. The standard mapping paths for converting DDD deliverables into the OpenSpec workflow described below are distilled from the open-source skill repository project [domain-driven-design-skills](https://github.com/ForceInjection/domain-driven-design-skills) (see the `ddd-openspec-mapping.md` document for details).
+
+### 1. Strategic Alignment and Directory Mapping
+
+At the strategic level, by introducing DDD's spatial partitioning methodology into OpenSpec's directory structure, a natural correspondence between design and specification can be achieved.
+
+The "Bounded Context" in DDD corresponds to the sub-domain directories under the `specs/` directory in OpenSpec. This alignment ensures that every business boundary identified by DDD has a clear attribution in the engineering specifications. Meanwhile, declaring this mapping relationship in `openspec/config.yaml` provides the AI Agent with a global architectural context.
+
+```yaml
+# openspec/config.yaml example: Domain and Bounded Context mapping configuration
+context: |
+  ## Project Domain Mapping
+  This system follows DDD design, and core bounded contexts include:
+  - User Management Context
+  - Order Management Context
+  - Payment Context
+```
+
+### 2. Tactical Implementation and Structure Mapping
+
+Tactical design determines the quality of code implementation. OpenSpec provides a structured expression method to transform DDD building blocks into verifiable and executable task sequences.
+
+The table below shows the specific mapping relationship between OpenSpec core components and DDD deliverables:
+
+| OpenSpec Specification Structure | Corresponding DDD Deliverable | Description and Explanation |
+| :--- | :--- | :--- |
+| **Domain** | **Bounded Context** | A domain directory corresponds to a bounded context. |
+| **Requirement** | **Domain Service** / **Command** | Describes a core business function or operation. |
+| **Scenario** | **Aggregate Behavior** | Uses Given/When/Then format to precisely describe aggregate behavior. |
+| **Design** | **Application Service** | Coordinates multiple domain services, manages transactions and security. |
+| **Tasks** | **Tactical Design Backlog** | Tasks for concrete implementations like entities, value objects, repository interfaces, etc. |
+
+### 3. Workflow-Driven Lifecycle
+
+The OpenSpec workflow highly aligns with the iterative modeling of DDD, emphasizing a brownfield-first refactoring capability.
+
+- **Propose**: Use `/opsx:propose` to quickly initialize changes and consolidate domain modeling conclusions.
+- **Apply**: Utilize AI to implement code and perform automated verification based on the specifications (Requirements and Scenarios).
+- **Archive**: Merge incremental specifications into the master specification via `openspec archive`, ensuring a single source of truth for domain knowledge.
+
+---
+
 ## Quick Start
 
 ### Node.js Example
@@ -149,7 +193,7 @@ Recommended learning order:
 
 To more efficiently implement OpenSpec specifications in real-world development, this project recommends pairing with a dedicated AI assistant skill.
 
-- **[OpenSpec Assistant](https://github.com/ForceInjection/awesome-skills/tree/main/openspec-assistant)**: An AI skill designed specifically for executing OpenSpec Spec-Driven Development (SDD). It covers the complete lifecycle of intent alignment, specification generation, code implementation, and automated verification. It also supports multi-role collaboration among architects (writing and reviewing specs), developers (writing code), and QA engineers (writing tests), and natively supports the `/opsx` command system used in this project.
+- **[OpenSpec Assistant](https://github.com/ForceInjection/awesome-skills/tree/main/skills/openspec-assistant)**: An AI skill designed specifically for executing OpenSpec Spec-Driven Development (SDD). It covers the complete lifecycle of intent alignment, specification generation, code implementation, and automated verification. It also supports multi-role collaboration among architects (writing and reviewing specs), developers (writing code), and QA engineers (writing tests), and natively supports the `/opsx` command system used in this project.
 
 ---
 
@@ -158,3 +202,4 @@ To more efficiently implement OpenSpec specifications in real-world development,
 - [OpenSpec Official Repository](https://github.com/Fission-AI/OpenSpec)
 - [OpenSpec Official Documentation](https://github.com/Fission-AI/OpenSpec/tree/main/docs)
 - [npm Package](https://www.npmjs.com/package/@fission-ai/openspec)
+- [DDD Skills Repository Online Project](https://github.com/ForceInjection/domain-driven-design-skills)
